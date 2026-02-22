@@ -376,3 +376,67 @@ details > summary::after {
 details[open] > summary::after {
   content: "▲";
 }
+
+/* ── Copy-code button ────────────────────────────────────────────────────────
+   Appears on hover over any Rouge-highlighted code block.
+   Positioning context is set inline by copy-code.js on the wrapper element.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+.copy-code-btn {
+  /* Position: top-right corner of the code block */
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  z-index: 10;
+
+  /* Appearance */
+  background: rgba(255, 255, 255, 0.85);
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  font-family: inherit;
+  line-height: 1.4;
+  cursor: pointer;
+  user-select: none;
+
+  /* Hidden by default; shown on wrapper hover */
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+/* Show when the code block wrapper is hovered or the button itself is focused */
+div.highlight:hover .copy-code-btn,
+div.highlight--bare:hover .copy-code-btn,
+.copy-code-btn:focus {
+  opacity: 1;
+}
+
+/* Always visible on touch devices (no hover) */
+@media (hover: none) {
+  .copy-code-btn {
+    opacity: 1;
+  }
+}
+
+/* Success state */
+.copy-code-btn--success {
+  background: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+  opacity: 1;
+}
+
+/* Error state */
+.copy-code-btn--error {
+  background: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+  opacity: 1;
+}
+
+/* Disabled while async copy is in-flight */
+.copy-code-btn:disabled {
+  cursor: default;
+}
